@@ -13,7 +13,7 @@ public class FallingBlockGuide extends GuesserGuide {
     }
 
     boolean blockPlacement() {
-        if (targetState.getBlock() instanceof FallingBlock) {
+        if (false && targetState.getBlock() instanceof FallingBlock) {
             BlockState below = state.world.getBlockState(state.blockPos.offset(Direction.DOWN));
             return FallingBlock.canFallThrough(below);
         }
