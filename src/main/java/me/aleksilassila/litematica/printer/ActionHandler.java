@@ -24,20 +24,25 @@ public class ActionHandler {
     private int tick = 0;
 
     public void onGameTick() {
+        int num = 100;
         int tickRate = Configs.PRINTING_INTERVAL.getIntegerValue();
-        tick = tick % tickRate == tickRate - 1 ? 0 : tick + 1;
-
-        if (tick % tickRate != 0) {
-            return;
+        if(tickRate > 0){
+            tick = tick % tickRate == tickRate - 1 ? 0 : tick + 1;
+    
+            if (tick % tickRate != 0) {
+                return;
+            }
+            num = 1;
         }
-
-        Action nextAction = actionQueue.poll();
-
-        if (nextAction != null) {
-            Printer.printDebug("Sending action {}", nextAction);
-            nextAction.send(client, player);
-        } else {
-            lookAction = null;
+        for(int i=1;i<=num;i++){
+            Action nextAction = actionQueue.poll();
+            if (nextAction != null) {
+                Printer.printDebug("Sending action {}", nextAction);
+                nextAction.send(client, player);
+            } else {
+                lookAction = null;
+                break;
+            }
         }
     }
 
